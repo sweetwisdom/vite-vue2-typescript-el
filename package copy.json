@@ -2,6 +2,7 @@
   "name": "vite-vue2-typescript",
   "private": true,
   "scripts": {
+    "postinstall": "husky install",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint './src/**/*.{js,ts,tsx,vue,md}'",
@@ -9,15 +10,21 @@
     "format": "pretty-quick --staged --ignore-path .gitignore"
   },
   "dependencies": {
-    "@vitejs/plugin-vue2": "^2.2.0",
     "@vueuse/core": "^4.9.1",
-    "clipboard": "^2.0.11",
-    "core-js": "^3.11.1",
+    "axios": "^0.27.2",
+    "core-js": "^3.22.5",
+    "echarts": "^4.9.0",
     "element-ui": "^2.15.5",
-    "vue": "^2.7.0",
+    "g": "^2.0.1",
+    "nprogress": "^0.2.0",
+    "throttle-debounce": "^5.0.0",
+    "vue": "^2.6.12",
+    "vue-fullscreen": "^2.6.1",
     "vue-router": "^3.5.1",
     "vue2-helpers": "~1.1.7",
-    "vuex": "^3.6.2"
+    "vuedraggable": "^2.24.3",
+    "vuex": "^3.6.2",
+    "yarn": "^1.22.18"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
@@ -35,6 +42,7 @@
     "eslint-config-prettier": "~8.3.0",
     "eslint-plugin-prettier": "~3.4.0",
     "eslint-plugin-vue": "~7.9.0",
+    "husky": "~6.0.0",
     "lint-staged": "^11.1.2",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.1",
@@ -42,15 +50,17 @@
     "typescript": "^4.3.5",
     "unplugin-vue-components": "0.17.11",
     "unplugin-vue2-script-setup": "^0.4.2",
-    "vite": "^4.3.9",
+    "vite": "~2.8.6",
+    "vite-plugin-compression": "^0.4.0",
     "vite-plugin-inspect": "^0.2.2",
     "vite-plugin-optimize-persist": "^0.0.5",
     "vite-plugin-package-config": "^0.0.3",
     "vite-plugin-pages": "^0.17.4",
     "vite-plugin-style-import": "^1.1.1",
     "vite-plugin-vue-layouts": "^0.3.1",
+    "vite-plugin-vue2": "^1.4.4",
     "vue-demi": "~0.12.1",
-    "vue-template-compiler": "~2.6.14"
+    "vue-template-compiler": "^2.6.14"
   },
   "lint-staged": {
     "**/**.{js,json,vue,ts}": [
@@ -58,27 +68,57 @@
       "pretty-quick --staged --ignore-path .gitignore"
     ]
   },
- 
-  
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": "./.cz-config.js"
+    }
+  },
   "vite": {
     "optimizeDeps": {
       "include": [
         "@vue/runtime-dom",
-        "clipboard",
+        "axios",
         "element-ui",
         "element-ui/lib/button",
         "element-ui/lib/card",
-        "element-ui/lib/collapse",
-        "element-ui/lib/collapse-item",
+        "element-ui/lib/carousel",
+        "element-ui/lib/carousel-item",
+        "element-ui/lib/cascader",
+        "element-ui/lib/col",
+        "element-ui/lib/dialog",
         "element-ui/lib/divider",
+        "element-ui/lib/form",
+        "element-ui/lib/form-item",
+        "element-ui/lib/input",
+        "element-ui/lib/link",
         "element-ui/lib/menu",
         "element-ui/lib/menu-item",
+        "element-ui/lib/option",
+        "element-ui/lib/pagination",
+        "element-ui/lib/result",
+        "element-ui/lib/row",
+        "element-ui/lib/select",
         "element-ui/lib/tag",
-        "element-ui/lib/tooltip",
+        "element-ui/lib/timeline",
+        "element-ui/lib/timeline-item",
+        "nprogress",
+        "throttle-debounce",
         "vue",
+        "vue-fullscreen",
         "vue-router",
+
+        "vuedraggable",
         "vuex"
       ]
     }
-  }
+  },
+  "__npminstall_done": false
 }

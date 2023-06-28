@@ -5,6 +5,7 @@ dist.zip
 dist.rar
 /.nuxt
 .nuxt
+auto-ai
 .nuxt/axios.js
 .history
 static/sw.js
@@ -33,3 +34,4 @@ yarn.lock
 *.njsproj
 *.sln
 *.sw*
+" " 

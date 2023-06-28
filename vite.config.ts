@@ -2,21 +2,22 @@
  * @Author: zhangchao
  * @Date: 2022-05-12 11:47:37
  * @LastEditors: zhangchao
- * @LastEditTime: 2022-05-12 11:52:36
+ * @LastEditTime: 2023-06-28 21:07:08
  * @Description: file content
  */
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import Layouts from 'vite-plugin-vue-layouts'
 import Pages from 'vite-plugin-pages'
-import { createVuePlugin } from 'vite-plugin-vue2'
+// import { createVuePlugin } from 'vite-plugin-vue2'
+import vue from '@vitejs/plugin-vue2'
 import ScriptSetup from 'unplugin-vue2-script-setup/vite'
 import Inspect from 'vite-plugin-inspect'
 import OptimizationPersist from 'vite-plugin-optimize-persist'
 import PkgConfig from 'vite-plugin-package-config'
 import Components from 'unplugin-vue-components/vite'
+import path from 'path'
 import { ElementUiResolver } from 'unplugin-vue-components/resolvers'
-
 
 const rollupOptions = {}
 
@@ -44,7 +45,10 @@ export default defineConfig({
   root: './', // js导入的资源路径
   publicDir: 'static',
   resolve: {
-    alias,
+    alias: {
+      '~': path.resolve(__dirname, './'),
+      '@': path.resolve(__dirname, './src'),
+    },
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.styl'],
     dedupe: ['vue-demi'],
   },
@@ -52,6 +56,7 @@ export default defineConfig({
   server: {
     // 代理
     proxy,
+    host: '0.0.0.0',
 
     port: 3003,
     fs: {
@@ -59,23 +64,17 @@ export default defineConfig({
     },
   },
   build: {
+    outDir: 'auto-ai', //指定输出路径
     target: 'es2015',
     minify: 'terser', // 是否进行压缩,boolean | 'terser' | 'esbuild',默认使用terser
     manifest: false, // 是否产出maifest.json
     sourcemap: false, // 是否产出soucemap.json
-    outDir: 'build', // 产出目录
+
     rollupOptions,
   },
   esbuild,
   plugins: [
-    createVuePlugin({
-      jsx: true,
-      vueTemplateOptions: {
-        compilerOptions: {
-          whitespace: 'condense',
-        },
-      },
-    }),
+    vue({}),
     PkgConfig(),
     OptimizationPersist(),
     Components({
@@ -97,7 +96,6 @@ export default defineConfig({
       replaceSquareBrackets: true,
       nuxtStyle: true,
     }),
-   
   ],
   css: {
     preprocessorOptions: {},

@@ -1,13 +1,13 @@
 <template>
-  <el-button type="info">
-    <slot />
-  </el-button>
+    <el-button type="info">
+        <slot />
+    </el-button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'ButtonTwo',
+    name: 'ButtonTwo',
 })
 </script>

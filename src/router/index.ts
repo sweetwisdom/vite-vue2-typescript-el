@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 const routes = setupLayouts(generatedRoutes)
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   routes,
 })
 
